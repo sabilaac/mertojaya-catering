@@ -1,6 +1,6 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/merq4257/public_html
+    - export DEPLOYPATH=/home/merq4257/public_html/addons/mertojaya-catering.id
     - /bin/cp -R * $DEPLOYPATH
     - echo "test"
