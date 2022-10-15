@@ -1626,6 +1626,14 @@ button.icon {
 	height: 18px;
 }
 
+.empty-state {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	flex-direction: column;
+}
+
 @media (max-width: 425px) {
 	.footer .menus {
 		grid-template-columns: repeat(1, 1fr);

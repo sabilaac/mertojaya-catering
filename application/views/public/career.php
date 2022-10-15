@@ -24,16 +24,32 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	))); ?>
 	<div class="tab-container">
 		<div id="fulltime" class="active">
-			fulltime
+			<?php $this->load->view('public/component/empty_state_component', array('data' => array(
+					'title' => 'Sayang sekali',
+					'thumbnail' => 'https://assets4.lottiefiles.com/packages/lf20_xvf1dl3s.json',
+					'description' => 'Fulltime job sedang tidak tersedia saat ini, kembali lagi nanti ya!',
+			))) ?>
 		</div>
 		<div id="parttime">
-			parttime
+			<?php $this->load->view('public/component/empty_state_component', array('data' => array(
+					'title' => 'Sayang sekali',
+					'thumbnail' => 'https://assets4.lottiefiles.com/packages/lf20_xvf1dl3s.json',
+					'description' => 'Part time job sedang tidak tersedia saat ini, kembali lagi nanti ya!',
+			))) ?>
 		</div>
 		<div id="freelance">
-			freelance
+			<?php $this->load->view('public/component/empty_state_component', array('data' => array(
+					'title' => 'Sayang sekali',
+					'thumbnail' => 'https://assets4.lottiefiles.com/packages/lf20_xvf1dl3s.json',
+					'description' => 'Freelance job sedang tidak tersedia saat ini, kembali lagi nanti ya!',
+			))) ?>
 		</div>
 		<div id="intern">
-			intern
+			<?php $this->load->view('public/component/empty_state_component', array('data' => array(
+					'title' => 'Sayang sekali',
+					'thumbnail' => 'https://assets4.lottiefiles.com/packages/lf20_xvf1dl3s.json',
+					'description' => 'Intern job sedang tidak tersedia saat ini, kembali lagi nanti ya!',
+			))) ?>
 		</div>
 	</div>
 </div>

@@ -10,19 +10,13 @@ $link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']
 <?php $this->load->view('public/component/header'); ?>
 <section id="error">
 	<div class="container">
-		<lottie-player src="https://assets1.lottiefiles.com/packages/lf20_wwTPJf.json"
-					   background="transparent" style="width: 300px; height: 300px;" loop
-					   autoplay></lottie-player>
-		<h4>
-			Halaman tidak ditemukan
-		</h4>
-		<small>
-			Periksa kembali alamat <span><?= $link ?></span> ya
-		</small>
-		<button onclick="location.href = '<?= base_url() ?>'">
-			<img src="<?= base_url()?>assets/image/icon/home.svg" alt="Icon" />
-			Beranda
-		</button>
+		<?php $this->load->view('public/component/empty_state_component', array('data' => array(
+				'title' => 'Halaman tidak ditemukan',
+				'thumbnail' => 'https://assets6.lottiefiles.com/packages/lf20_AQcLsD.json',
+				'description' => 'Periksa kembali alamat ' . $link . ' ya',
+				'action' => 'Beranda',
+				'link' => base_url(),
+		))) ?>
 	</div>
 </section>
 <?php $this->load->view('public/component/footer'); ?>

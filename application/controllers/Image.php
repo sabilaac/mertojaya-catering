@@ -52,7 +52,7 @@ class Image extends CI_Controller
 			}
 			imagecopyresized($im, $source, 0, 0, 0, 0, $width, $height, $w, $h);
 			header('Content-type: image/jpeg');
-			imagejpeg($im, null, 20);
+			imagejpeg($im, null, 100);
 			imagedestroy($im);
 		}
 	}
