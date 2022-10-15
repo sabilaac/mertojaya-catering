@@ -14,16 +14,16 @@ if (isset($data)) {
 					<div class="package-showcase-item category_<?= $item->category_id ?>">
 						<div class="thumbnail">
 							<?php if ($item->photo_1) : ?>
-								<img src="<?= base_url() . 'image/' . $item->photo_1 . '?copyright=1' ?>"
+								<img src="<?= base_url() . 'image/' . $item->photo_1 . '?scale=50&quality=35&copyright=1' ?>"
 									 alt="Thumbnail"/>
 							<?php elseif ($item->photo_2) : ?>
-								<img src="<?= base_url() . 'image/' . $item->photo_2 . '?copyright=1' ?>"
+								<img src="<?= base_url() . 'image/' . $item->photo_2 . '?scale=50&quality=35&copyright=1' ?>"
 									 alt="Thumbnail"/>
 							<?php elseif ($item->photo_3) : ?>
-								<img src="<?= base_url() . 'image/' . $item->photo_3 . '?copyright=1' ?>"
+								<img src="<?= base_url() . 'image/' . $item->photo_3 . '?scale=50&quality=35&copyright=1' ?>"
 									 alt="Thumbnail"/>
 							<?php elseif ($item->photo_4) : ?>
-								<img src="<?= base_url() . 'image/' . $item->photo_4 . '?copyright=1' ?>"
+								<img src="<?= base_url() . 'image/' . $item->photo_4 . '?scale=50&quality=35&copyright=1' ?>"
 									 alt="Thumbnail"/>
 							<?php endif; ?>
 							<?php if($item->promoted_id) : ?>

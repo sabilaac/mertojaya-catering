@@ -32,7 +32,7 @@ if (isset($data)) {
 				<a href="<?= base_url() . 'article?url=' . $item->url ?>">
 					<div class="article-item">
 						<div class="article-item-header">
-							<img src="<?= base_url() .'image/' . $item->thumbnail .'?copyright=1' ?>" alt="Thumbnail"/>
+							<img src="<?= base_url() .'image/' . $item->thumbnail .'?scale=50&quality=35&copyright=1' ?>" alt="Thumbnail"/>
 							<div class="date">
 								<h3>
 									<?= date("d", strtotime($item->date_created)); ?>

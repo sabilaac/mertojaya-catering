@@ -21,6 +21,7 @@ class Image extends CI_Controller
 		$height = $this->input->get('height');
 		$width = $this->input->get('width');
 		$scale = $this->input->get('scale');
+		$quality = $this->input->get('quality');
 		$copyright = $this->input->get('copyright');
 //		$copyright = true;
 		$im = null;
@@ -52,7 +53,7 @@ class Image extends CI_Controller
 			}
 			imagecopyresized($im, $source, 0, 0, 0, 0, $width, $height, $w, $h);
 			header('Content-type: image/jpeg');
-			imagejpeg($im, null, 100);
+			imagejpeg($im, null, $quality ? intval($quality) : 100);
 			imagedestroy($im);
 		}
 	}

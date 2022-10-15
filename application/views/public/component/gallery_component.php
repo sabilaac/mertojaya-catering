@@ -26,7 +26,7 @@ if (isset($data)) {
 			<?php foreach ($data_list as $i => $item) : ?>
 				<div class="gallery-item">
 					<a href="<?= base_url() . 'gallery?id=' . $item->id ?>">
-						<img src="<?= base_url() . 'image/' . $item->photo . '?scale=50&copyright=1' ?>" alt="Photo"/>
+						<img src="<?= base_url() . 'image/' . $item->photo . '?scale=50&quality=35&copyright=1' ?>" alt="Photo"/>
 						<div class="gallery-item-detail">
 							<div>
 								<span class="ellipsis">
