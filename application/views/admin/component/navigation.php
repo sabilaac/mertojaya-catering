@@ -52,7 +52,7 @@ $active_route = $this->uri->segment(3);
 				<?php if (isset($package_list) && sizeof($package_list) > 0) : ?>
 					<?php foreach ($package_list as $i => $item) : ?>
 						<a class="collapse-item <?= $active_page === 'package' && $active_route === $item->url ? 'active' : '' ?>"
-						   href="<?= base_url() ?>admin/package/edit?url=<?= $item->url ?>">
+						   href="<?= base_url() ?>admin/package/edit/<?= $item->url ?>">
 							<span class="ellipsis">
 							<?= $item->title ?>
 							</span>

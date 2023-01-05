@@ -1,96 +1,58 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 ?>
-<h1 class="h3 mb-4 text-gray-800">Daftar Paket</h1>
+<h1 class="h3 mb-4 text-gray-800">Daftar Ulasan</h1>
 <div class="card shadow mb-4">
 	<div class="card-header py-3">
-		<h6 class="m-0 font-weight-bold text-primary">Paket yang tersedia</h6>
+		<h6 class="m-0 font-weight-bold text-primary">Edukasi yang tersedia</h6>
 	</div>
 	<div class="card-body">
-		<?php $this->load->view('admin/component/alert', array('data' => $this->session->flashdata('package_data'))) ?>
+		<?php $this->load->view('admin/component/alert', array('data' => $this->session->flashdata('feedback_data'))) ?>
 		<div class="table-responsive">
 			<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 				<thead>
 				<tr>
 					<th style="width: 5%">No</th>
-					<th style="width: 10%">Foto Paket</th>
-					<th style="width: 18%">Nama Paket</th>
-					<th style="width: 15%">Kategori</th>
-					<th style="width: 10%">Harga</th>
-					<th style="width: 10%">Minimum Porsi</th>
-					<th style="width: 17%">Direkomendasikan</th>
+					<th style="width: 10%">Nama</th>
+					<th style="width: 18%">Ulasan</th>
+					<th style="width: 15%">Tanggal ulasan</th>
 					<th style="width: 15%">Tool</th>
 				</tr>
 				</thead>
 				<tfoot>
 				<tr>
-					<th colspan="7">Total</th>
-					<th><?= isset($package_list) ? sizeof($package_list) : 0 ?></th>
+					<th colspan="4">Total</th>
+					<th><?= sizeof($feedback_list) ?></th>
 				</tr>
 				</tfoot>
 				<tbody>
-				<?php if (isset($package_list)) : ?>
-					<?php foreach ($package_list as $i => $item) : ?>
+				<?php if (isset($feedback_list)) : ?>
+					<?php foreach ($feedback_list as $i => $item) : ?>
 						<tr>
 							<td><?= $i + 1 ?></td>
+							<td><b><?= $item->name ?></b></td>
+							<td><?= $item->review ?></td>
+							<td><?= date("l, d F Y", strtotime($item->date_created)); ?></td>
 							<td>
-								<?php if ($item->photo_1) : ?>
-									<img src="<?= base_url() . 'image/' . $item->photo_1_uuid ?>" alt="Thumbnail" width="72"
-										 height="72"/>
-								<?php elseif ($item->photo_2) : ?>
-									<img src="<?= base_url() . 'image/' . $item->photo_2_uuid ?>" alt="Thumbnail" width="72"
-										 height="72"/>
-								<?php elseif ($item->photo_3) : ?>
-									<img src="<?= base_url() . 'image/' . $item->photo_3_uuid ?>" alt="Thumbnail" width="72"
-										 height="72"/>
-								<?php elseif ($item->photo_4) : ?>
-									<img src="<?= base_url() . 'image/' . $item->photo_4_uuid ?>" alt="Thumbnail" width="72"
-										 height="72"/>
-								<?php else : ?>
-									(Tidak ada Foto)
-								<?php endif; ?>
-							</td>
-							<td><b><?= $item->title ?></b></td>
-							<td><?= $item->category_name ?></td>
-							<td>Rp. <?= number_format($item->price, 0, ",", ".") ?>,-</td>
-							<td><?= $item->count ?> pcs</td>
-							<td>
-								<?php if ($item->promoted_id) : ?>
-									<a href="<?= base_url() . 'admin/package/dispatch_recommendation?id=' .$item->promoted_id ?>" class="btn btn-danger">
-										<span class="text">Lepas rekomendasi</span>
-									</a>
-								<?php else : ?>
-									<button onclick="toggleRecommendation('<?= $item->id ?>')" data-toggle="modal"
-											data-target="#AddRecommendation"
-											class="btn btn-primary">
-										<span class="text">Tambahkan ke rekomendasi</span>
-									</button>
-								<?php endif; ?>
-							</td>
-							<td>
-								<a href="<?= base_url() . 'admin/package/remove/' . $item->url ?>"
+								<a href="<?= base_url() . 'admin/feedback/remove/' . $item->id ?>"
 								   class="btn btn-danger">
 									<i class="fas fa-ban"></i>
 								</a>
-								<a href="<?= base_url() . 'admin/package/edit/' . $item->url ?>"
+								<a href="<?= base_url() . 'admin/feedback/edit/' . $item->id ?>"
 								   class="btn btn-primary">
 									<i class="fas fa-pencil-alt"></i>
 								</a>
 								<?php if ($item->status === '1') : ?>
-									<a href="<?= base_url() . 'admin/package/visibility/' . $item->url ?>"
+									<a href="<?= base_url() . 'admin/feedback/visibility/' . $item->id ?>"
 									   class="btn btn-dark">
 										<i class="far fa-eye"></i>
 									</a>
 								<?php else: ?>
-									<a href="<?= base_url() . 'admin/package/visibility/' . $item->url ?>"
+									<a href="<?= base_url() . 'admin/feedback/visibility/' . $item->id ?>"
 									   class="btn btn-dark">
 										<i class="fas fa-eye-slash"></i>
 									</a>
 								<?php endif; ?>
-								<a href="<?= base_url() . 'package?url=' . $item->url ?>"
-								   class="btn btn-success" target="_blank">
-									<i class="fas fa-external-link-alt"></i>
-								</a>
 							</td>
 						</tr>
 					<?php endforeach; ?>
@@ -114,9 +76,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			</div>
 			<div class="modal-body">
 				<?php $this->load->view('admin/component/alert', array('data' => array(
-						'id' => 'alertRecommendation',
-						'show' => false,
-						'cancel' => false,
+					'id' => 'alertRecommendation',
+					'show' => false,
+					'cancel' => false,
 				))) ?>
 				<div class="form-group">
 					<label for="video_url">

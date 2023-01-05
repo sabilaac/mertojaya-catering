@@ -18,10 +18,10 @@ if (isset($package_detail)) {
 	$price = $package_detail->price;
 	$count = $package_detail->count;
 	$content = $package_detail->content;
-	$photo_1 = $package_detail->photo_1;
-	$photo_2 = $package_detail->photo_2;
-	$photo_3 = $package_detail->photo_3;
-	$photo_4 = $package_detail->photo_4;
+	$photo_1 = $package_detail->photo_1_uuid;
+	$photo_2 = $package_detail->photo_2_uuid;
+	$photo_3 = $package_detail->photo_3_uuid;
+	$photo_4 = $package_detail->photo_4_uuid;
 	$date = $package_detail->date_created;
 }
 ?>
@@ -174,7 +174,7 @@ if (isset($package_detail)) {
 					<div class="image-input-list">
 						<div class="form-group image-input-group __1 <?= $photo_1 ? 'uploaded' : '' ?>">
 							<label for="image1">
-								<img src="<?= $photo_1 ? base_url() . 'cdn/' . $photo_1 : '#' ?>" alt="Image"/>
+								<img src="<?= $photo_1 ? base_url() . 'image/' . $photo_1 : '#' ?>" alt="Image"/>
 								<div class="placeholder">
 									<i class="far fa-plus-square  fa-2x"></i>
 									<small>
@@ -190,7 +190,7 @@ if (isset($package_detail)) {
 						</div>
 						<div class="form-group image-input-group __2 <?= $photo_2 ? 'uploaded' : '' ?>">
 							<label for="image2">
-								<img src="<?= $photo_2 ? base_url() . 'cdn/' . $photo_2 : '#' ?>" alt="Image"/>
+								<img src="<?= $photo_2 ? base_url() . 'image/' . $photo_2 : '#' ?>" alt="Image"/>
 								<div class="placeholder">
 									<i class="far fa-plus-square  fa-2x"></i>
 									<small>
@@ -206,7 +206,7 @@ if (isset($package_detail)) {
 						</div>
 						<div class="form-group image-input-group __3 <?= $photo_3 ? 'uploaded' : '' ?>">
 							<label for="image3">
-								<img src="<?= $photo_3 ? base_url() . 'cdn/' . $photo_3 : '#' ?>" alt="Image"/>
+								<img src="<?= $photo_3 ? base_url() . 'image/' . $photo_3 : '#' ?>" alt="Image"/>
 								<div class="placeholder">
 									<i class="far fa-plus-square  fa-2x"></i>
 									<small>
@@ -222,7 +222,7 @@ if (isset($package_detail)) {
 						</div>
 						<div class="form-group image-input-group __4 <?= $photo_4 ? 'uploaded' : '' ?>">
 							<label for="image4">
-								<img src="<?= $photo_4 ? base_url() . 'cdn/' . $photo_4 : '#' ?>" alt="Image"/>
+								<img src="<?= $photo_4 ? base_url() . 'image/' . $photo_4 : '#' ?>" alt="Image"/>
 								<div class="placeholder">
 									<i class="far fa-plus-square  fa-2x"></i>
 									<small>
@@ -251,21 +251,18 @@ if (isset($package_detail)) {
 						</div>
 						<div class="col-lg-6 text-right">
 							<?php if ($mode === 'edit') : ?>
-								<a href="<?= base_url() . 'admin/package/remove?url=' . $url ?>"
+								<a href="<?= base_url() . 'admin/package/remove/' . $url ?>"
 								   class="btn btn-danger btn-icon-split">
 									<span class="icon text-white-50">
 										<i class="fas fa-ban"></i>
 									</span>
 									<span class="text">Hapus</span>
 								</a>
-								<span class="d-inline-block" tabindex="0" data-toggle="tooltip"
-									  title="Fitur akan tersedia di update selanjutnya" data-placement="bottom">
-									<button class="btn btn-primary btn-icon-split" disabled>
-								</span>
+								<button type="submit" name="submit" value="submit" class="btn btn-primary btn-icon-split">
 								<span class="icon text-white-50">
 									<i class="fas fa-save"></i>
 								</span>
-								<span class="text">Ubah</span>
+									<span class="text">Ubah</span>
 								</button>
 							<?php else: ?>
 								<a href="<?= base_url() ?>admin/package" class="btn btn-danger btn-icon-split">
@@ -274,7 +271,7 @@ if (isset($package_detail)) {
 								</span>
 									<span class="text">Batal</span>
 								</a>
-								<button type="submit" name="add" class="btn btn-primary btn-icon-split">
+								<button type="submit" name="submit" value="submit" class="btn btn-primary btn-icon-split">
 								<span class="icon text-white-50">
 									<i class="fas fa-save"></i>
 								</span>
@@ -296,7 +293,7 @@ if (isset($package_detail)) {
 		let url_input = $('#url_package');
 		let url_input_hidden = $('#url_package_hidden');
 		let url = null;
-		await $.getJSON('<?= base_url() ?>api/package/unique_url?url=' + title_input.val(), function (data) {
+		await $.getJSON('<?= base_url() ?>api/generate_url/article?url=' + title_input.val(), function (data) {
 			url = data?.data.replaceAll(/([!.,_=#~%`@*+?^$|(){}\[\]])/mg, '').replaceAll(' ', '-').replaceAll('&', '&amp;').toLowerCase()
 			url_input.val('<?= base_url() ?>package?url=' + url);
 			url_input_hidden.val(url);

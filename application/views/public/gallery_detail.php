@@ -24,8 +24,8 @@ if (isset($gallery_detail)) {
 		<?php $this->load->view('public/component/breadcrumb'); ?>
 		<div class="thumbnail-slider">
 			<div class="thumbnail">
-				<a href="<?= base_url() . 'image/' . $photo . '?copyright=1' ?>" target="_blank">
-					<img src="<?= base_url() . 'image/' . $photo . '?copyright=1' ?>" alt="Thumbnail"/>
+				<a href="<?= base_url() . 'cdn/' . $photo ?>" target="_blank">
+					<img src="<?= base_url() . 'cdn/' . $photo ?>" alt="Thumbnail"/>
 				</a>
 				<div class="arrow-wrapper">
 					<a href="<?= base_url() . 'gallery?id=' . ($id - 1) ?>">

@@ -9,13 +9,42 @@ class Api extends CI_Controller
 	{
 		parent::__construct();
 		date_default_timezone_set('Asia/Jakarta');
-		$this->load->model("config_models");
-		$this->load->model("package_models");
-		$this->load->model("promoted_models");
 		$this->data = $this->config_models->autoload_navigation_admin();
 	}
 
-	public function package($route = null)
+	public function generate_url($target = null)
+	{
+		$url = $this->input->get('url');
+
+		if ($target) {
+			$found = false;
+			$index = 0;
+			$data = array();
+
+			while (!$found) {
+				$url = $url . ($index > 0 ? '-' . $index : '');
+				if ($target === 'article') {
+					$data = $this->article_models->get(array('url' => $url));
+				} else if ($target === 'package') {
+					$data = $this->package_models->get(array('url' => $url));
+				}
+
+				if (sizeof($data) === 0) {
+					$found = true;
+				} else {
+					$index++;
+				}
+			}
+
+			echo json_encode(array(
+				'success' => true,
+				'message' => 'OK!',
+				'data' => $url,
+			));
+		}
+	}
+
+	public function article($route = null)
 	{
 		$url = $this->input->get('url');
 
@@ -25,7 +54,7 @@ class Api extends CI_Controller
 				$index = 0;
 				while (!$found) {
 					$url = $url . ($index > 0 ? '-' . $index : '');
-					$res_package = $this->package_models->get(array('url' => $url));
+					$res_package = $this->article_models->get(array('url' => $url));
 
 					if (sizeof($res_package) === 0) {
 						$found = true;

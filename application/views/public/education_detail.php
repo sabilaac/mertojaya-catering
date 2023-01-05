@@ -7,7 +7,7 @@ $content = null;
 if (isset($education_detail)) {
 	$title = isset($education_detail->title) ? $education_detail->title : '(Tidak ada Judul)';
 	$date = isset($education_detail->date_created) ? $education_detail->date_created : null;
-	$thumbnail = isset($education_detail->thumbnail) ? $education_detail->thumbnail : null;
+	$thumbnail = isset($education_detail->thumbnail_uuid) ? $education_detail->thumbnail_uuid : null;
 	$content = isset($education_detail->content) ? $education_detail->content : null;
 }
 ?>
@@ -39,7 +39,7 @@ if (isset($education_detail)) {
 		<div class="content-wrapper">
 			<div class="content">
 				<div class="thumbnail">
-					<img src="<?= base_url() . 'image/' . $thumbnail . '?copyright=1' ?>" alt="Thumbnail"/>
+					<img src="<?= base_url() . 'image/' . $thumbnail . '?quality=100' ?>" alt="Thumbnail"/>
 				</div>
 				<?= $content ?>
 			</div>

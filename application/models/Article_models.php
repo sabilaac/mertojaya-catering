@@ -8,10 +8,13 @@ class Article_models extends CI_Model
 		$res = null;
 		$this->db->select('article.*,
 		user.name as full_name,
+		storage.uuid as thumbnail_uuid,
+		storage.copyright as thumbnail_copyright,
 		');
 
 		$this->db->from('article article');
 		$this->db->join('user user', 'user.id = article.user_id', 'left');
+		$this->db->join('storage storage', 'storage.id = article.thumbnail_id', 'left');
 		if ($filter) {
 			if (isset($filter['id'])) {
 				$this->db->where("article.id", $filter['id']);

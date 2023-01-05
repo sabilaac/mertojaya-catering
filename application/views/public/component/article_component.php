@@ -11,20 +11,20 @@ if (isset($data)) {
 ?>
 
 <div class="article_component">
-	<?php if($title || $description) : ?>
-	<div class="article-header">
-		<div>
-			<h3>
-				<?= $title ?>
-			</h3>
-			<h5>
-				<?= $description ?>
-			</h5>
+	<?php if ($title || $description) : ?>
+		<div class="article-header">
+			<div>
+				<h3>
+					<?= $title ?>
+				</h3>
+				<h5>
+					<?= $description ?>
+				</h5>
+			</div>
+			<a href="<?= base_url() ?>article">
+				Lihat Semua
+			</a>
 		</div>
-		<a href="<?= base_url() ?>article">
-			Lihat Semua
-		</a>
-	</div>
 	<?php endif; ?>
 	<div class="article-list">
 		<?php if ($data_list && sizeof($data_list) > 0) : ?>
@@ -32,7 +32,8 @@ if (isset($data)) {
 				<a href="<?= base_url() . 'article?url=' . $item->url ?>">
 					<div class="article-item">
 						<div class="article-item-header">
-							<img src="<?= base_url() .'image/' . $item->thumbnail .'?scale=50&quality=35&copyright=1' ?>" alt="Thumbnail"/>
+							<img src="<?= base_url('image/' . $item->thumbnail_uuid) ?>"
+								 alt="Thumbnail"/>
 							<div class="date">
 								<h3>
 									<?= date("d", strtotime($item->date_created)); ?>
@@ -57,17 +58,15 @@ if (isset($data)) {
 						<div class="article-item-content">
 							<span class="ellipsis"><?= strip_tags($item->content) ?></span>
 						</div>
-						<!--					<div class="article-item-tag">-->
-						<!--						<small>-->
-						<!--							Article Tag 1-->
-						<!--						</small>-->
-						<!--						<small>-->
-						<!--							Sedap-->
-						<!--						</small>-->
-						<!--						<small>-->
-						<!--							Mantap-->
-						<!--						</small>-->
-						<!--					</div>-->
+						<?php if (isset($item->category_tag)) : ?>
+							<div class="article-item-tag">
+								<?php foreach (json_decode($item->category_tag) as $index => $tag) : ?>
+									<small>
+										<?= $tag ?>
+									</small>
+								<?php endforeach; ?>
+							</div>
+						<?php endif; ?>
 					</div>
 				</a>
 			<?php endforeach; ?>

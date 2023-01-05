@@ -10,7 +10,7 @@ if (isset($article_detail)) {
 	$title = isset($article_detail->title) ? $article_detail->title : '(Tidak ada Judul)';
 	$full_name = isset($article_detail->full_name) ? $article_detail->full_name : '(Tidak ada Nama)';
 	$date = isset($article_detail->date_created) ? $article_detail->date_created : null;
-	$thumbnail = isset($article_detail->thumbnail) ? $article_detail->thumbnail : null;
+	$thumbnail = isset($article_detail->thumbnail_uuid) ? $article_detail->thumbnail_uuid : null;
 	$content = isset($article_detail->content) ? $article_detail->content : null;
 	$tags = isset($article_detail->category_tag) ? $article_detail->category_tag : array();
 }
@@ -49,7 +49,7 @@ if (isset($article_detail)) {
 		<div class="content-wrapper">
 			<div class="content">
 				<div class="thumbnail">
-					<img src="<?= base_url() . 'image/' . $thumbnail ?>" alt="Thumbnail"/>
+					<img src="<?= base_url() . 'image/' . $thumbnail . '?quality=100' ?>" alt="Thumbnail"/>
 				</div>
 				<?= $content ?>
 				<div class="separator"></div>

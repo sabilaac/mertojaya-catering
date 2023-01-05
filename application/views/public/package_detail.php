@@ -7,16 +7,16 @@ $content = null;
 $url = null;
 if (isset($package_detail)) {
 	if ($package_detail->photo_1) {
-		array_push($photo, $package_detail->photo_1);
+		array_push($photo, $package_detail->photo_1_uuid);
 	}
 	if ($package_detail->photo_2) {
-		array_push($photo, $package_detail->photo_2);
+		array_push($photo, $package_detail->photo_2_uuid);
 	}
 	if ($package_detail->photo_3) {
-		array_push($photo, $package_detail->photo_3);
+		array_push($photo, $package_detail->photo_3uuid);
 	}
 	if ($package_detail->photo_4) {
-		array_push($photo, $package_detail->photo_4);
+		array_push($photo, $package_detail->photo_4_uuid);
 	}
 	$title = $package_detail->title;
 	$content = $package_detail->content;
@@ -30,7 +30,7 @@ if (isset($package_detail)) {
 <div class="thumbnail">
 	<div class="owl-carousel thumbnail-list">
 		<?php foreach ($photo as $i => $item) : ?>
-			<img src="<?= base_url() . 'image/' . $item  . '?copyright=1'?>" alt="Showcase"/>
+			<img src="<?= base_url() . 'image/' . $item . '?quality=100'?>" alt="Showcase"/>
 		<?php endforeach; ?>
 	</div>
 </div>

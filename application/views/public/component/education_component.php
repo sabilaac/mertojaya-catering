@@ -13,7 +13,7 @@ if (isset($data)) {
 				<a href="<?= base_url() . 'education?url=' . $item->url ?>">
 					<div class="education-item">
 						<div class="education-item-header">
-							<img loading="lazy" src="<?= base_url() . 'image/' . $item->thumbnail . '?scale=50&quality=35&copyright=1' ?>"
+							<img loading="lazy" src="<?= base_url() . 'image/' . $item->thumbnail_uuid . '?scale=50&quality=30' ?>"
 								 alt="Thumbnail"/>
 						</div>
 						<div class="education-item-title">

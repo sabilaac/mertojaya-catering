@@ -6,8 +6,6 @@ class Config_models extends CI_Model
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model('package_models');
-		$this->load->model('category_models');
 	}
 
 	public function get($var)
@@ -50,6 +48,8 @@ class Config_models extends CI_Model
 	public function autoload_navigation_admin()
 	{
 		$data['package_list'] = $this->package_models->get();
+		$data['user_id'] = $this->session->userdata('id');
+		$data['cs_wa'] = $this->get('cs_wa');
 		return $data;
 	}
 }

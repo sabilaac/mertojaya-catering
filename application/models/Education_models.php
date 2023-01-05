@@ -3,18 +3,25 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Education_models extends CI_Model
 {
-	public function get($filter = null, $page = 0, $limit = null, $order = array('date_created', 'desc'))
+	public function get($filter = null, $page = 0, $limit = null, $order = array('education.date_created', 'desc'))
 	{
 		$res = null;
+		$this->db->select('education.*,
+		storage.uuid as thumbnail_uuid,
+		storage.copyright as thumbnail_copyright,
+		');
+
+		$this->db->from('education education');
+		$this->db->join('storage storage', 'storage.id = education.thumbnail_id', 'left');
 		if ($filter) {
 			if (isset($filter['id'])) {
-				$this->db->where("id", $filter['id']);
+				$this->db->where("education.id", $filter['id']);
 			}
 			if (isset($filter['url'])) {
-				$this->db->where("url", $filter['url']);
+				$this->db->where("education.url", $filter['url']);
 			}
 			if (isset($filter['status'])) {
-				$this->db->where("status", $filter['status']);
+				$this->db->where("education.status", $filter['status']);
 			}
 		}
 		if ($limit) {
@@ -26,7 +33,7 @@ class Education_models extends CI_Model
 		else {
 			$this->db->order_by('rand()');
 		}
-		$res = $this->db->get('education')->result();
+		$res = $this->db->get()->result();
 		return $res;
 	}
 

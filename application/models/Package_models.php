@@ -10,11 +10,19 @@ class Package_models extends CI_Model
 		category.name as category_name,
 		promoted.id as promoted_id,
 		promoted.video_url as promoted_video_url,
+		photo_1.uuid as photo_1_uuid,
+		photo_2.uuid as photo_2_uuid,
+		photo_3.uuid as photo_3_uuid,
+		photo_4.uuid as photo_4_uuid,
 		');
 
 		$this->db->from('package package');
 		$this->db->join('category category', 'category.id = package.category_id', 'left');
 		$this->db->join('promoted promoted', 'promoted.package_id = package.id', 'left');
+		$this->db->join('storage photo_1', 'photo_1.id = package.photo_1', 'left');
+		$this->db->join('storage photo_2', 'photo_2.id = package.photo_2', 'left');
+		$this->db->join('storage photo_3', 'photo_3.id = package.photo_3', 'left');
+		$this->db->join('storage photo_4', 'photo_4.id = package.photo_4', 'left');
 		if ($filter) {
 			if (isset($filter['id'])) {
 				$this->db->where("package.id", $filter['id']);
