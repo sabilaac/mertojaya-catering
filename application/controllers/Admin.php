@@ -1,4 +1,5 @@
 <?php
+ob_start();
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Admin extends CI_Controller
@@ -29,6 +30,9 @@ class Admin extends CI_Controller
 
 	public function article($route = null, $url = null)
 	{
+
+		echo $this->data["user_id"];
+
 		if (!$this->auth_models->getAuth()) {
 			$this->session->set_flashdata('login_data', array(
 				'success' => false,
@@ -67,6 +71,7 @@ class Admin extends CI_Controller
 							if ($insert_storage) {
 								$data_article = array(
 									'url' => $path,
+									'user_id' => $this->data["user_id"],
 									'thumbnail_id' => $insert_storage,
 									'title' => $title,
 									'content' => $content,
@@ -252,7 +257,6 @@ class Admin extends CI_Controller
 			$path = $this->input->post('path');
 			$copyright = $this->input->post('copyright') === "on" ? 1 : 0;
 			$content = $this->input->post('content');
-			$category_tag = $this->input->post('category_tag');
 			$submit = $this->input->post('submit');
 			$thumbnail = !empty($_FILES['thumbnail']['name']);
 			$error = null;
@@ -278,7 +282,6 @@ class Admin extends CI_Controller
 									'thumbnail_id' => $insert_storage,
 									'title' => $title,
 									'content' => $content,
-									'category_tag' => $category_tag ? json_encode(preg_split('/(,| , |, )/', $category_tag)) : null,
 								);
 								$insert_education = $this->education_models->insert($data_education);
 
@@ -510,6 +513,20 @@ class Admin extends CI_Controller
 							));
 						}
 					}
+				}
+			} else if ($route === 'remove') {
+				$delete_feedback = $this->feedback_models->delete(array('id' => $id));
+				if ($delete_feedback) {
+					$this->session->set_flashdata('feedback_data', array(
+						'success' => true,
+						'message' => 'Feedback telah dihapus'
+					));
+					redirect(base_url('admin/feednack'));
+				} else {
+					$this->session->set_flashdata('feedback_data', array(
+						'success' => false,
+						'message' => 'Feedback gagal dihapus'
+					));
 				}
 			} else if ($route === 'visibility') {
 				$this->data['data'] = array('title' => 'Loading', 'description' => 'Mnegatur visibilitas data ...', 'url' => base_url() . "admin/package");
@@ -915,7 +932,7 @@ class Admin extends CI_Controller
 		echo 'Sedang logout akun, mohon menunggu ...';
 
 		$this->session->set_userdata($session);
-		redirect(base_url() . "admin/login");
+		redirect(base_url("admin/login"));
 	}
 
 	public
